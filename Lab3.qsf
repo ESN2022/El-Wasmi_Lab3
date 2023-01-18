@@ -46,10 +46,8 @@ set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
-set_global_assignment -name QSYS_FILE Lab3_sys.qsys
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
-set_global_assignment -name VHDL_FILE Lab3.vhd
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
@@ -67,4 +65,56 @@ set_location_assignment PIN_B8 -to reset
 set_location_assignment PIN_AB16 -to GSENSOR_CS_n
 set_location_assignment PIN_AB15 -to scl
 set_location_assignment PIN_V11 -to sda
+set_location_assignment PIN_D15 -to leds_7[7]
+set_location_assignment PIN_C14 -to leds_7[0]
+set_location_assignment PIN_E15 -to leds_7[1]
+set_location_assignment PIN_C15 -to leds_7[2]
+set_location_assignment PIN_C16 -to leds_7[3]
+set_location_assignment PIN_E16 -to leds_7[4]
+set_location_assignment PIN_D17 -to leds_7[5]
+set_location_assignment PIN_C17 -to leds_7[6]
+set_location_assignment PIN_C18 -to leds_7[8]
+set_location_assignment PIN_D18 -to leds_7[9]
+set_location_assignment PIN_E18 -to leds_7[10]
+set_location_assignment PIN_B16 -to leds_7[11]
+set_location_assignment PIN_A17 -to leds_7[12]
+set_location_assignment PIN_A18 -to leds_7[13]
+set_location_assignment PIN_B17 -to leds_7[14]
+set_location_assignment PIN_A16 -to leds_7[15]
+set_location_assignment PIN_B20 -to leds_7[16]
+set_location_assignment PIN_A20 -to leds_7[17]
+set_location_assignment PIN_B19 -to leds_7[18]
+set_location_assignment PIN_A21 -to leds_7[19]
+set_location_assignment PIN_B21 -to leds_7[20]
+set_location_assignment PIN_C22 -to leds_7[21]
+set_location_assignment PIN_B22 -to leds_7[22]
+set_location_assignment PIN_A19 -to leds_7[23]
+set_global_assignment -name VHDL_FILE hardware/bin_to_7seg.vhd
+set_global_assignment -name QSYS_FILE Lab3_sys.qsys
+set_global_assignment -name VHDL_FILE Lab3.vhd
+set_location_assignment PIN_F21 -to leds_7[24]
+set_location_assignment PIN_E22 -to leds_7[25]
+set_location_assignment PIN_E21 -to leds_7[26]
+set_location_assignment PIN_C19 -to leds_7[27]
+set_location_assignment PIN_C20 -to leds_7[28]
+set_location_assignment PIN_D19 -to leds_7[29]
+set_location_assignment PIN_E17 -to leds_7[30]
+set_location_assignment PIN_D22 -to leds_7[31]
+set_location_assignment PIN_F18 -to leds_7[32]
+set_location_assignment PIN_E20 -to leds_7[33]
+set_location_assignment PIN_E19 -to leds_7[34]
+set_location_assignment PIN_J18 -to leds_7[35]
+set_location_assignment PIN_H19 -to leds_7[36]
+set_location_assignment PIN_F19 -to leds_7[37]
+set_location_assignment PIN_F20 -to leds_7[38]
+set_location_assignment PIN_F17 -to leds_7[39]
+set_location_assignment PIN_C10 -to switch[0]
+set_location_assignment PIN_C11 -to switch[1]
+set_location_assignment PIN_J20 -to leds_7[40]
+set_location_assignment PIN_K20 -to leds_7[41]
+set_location_assignment PIN_L18 -to leds_7[42]
+set_location_assignment PIN_N18 -to leds_7[43]
+set_location_assignment PIN_M20 -to leds_7[44]
+set_location_assignment PIN_N19 -to leds_7[45]
+set_location_assignment PIN_N20 -to leds_7[46]
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

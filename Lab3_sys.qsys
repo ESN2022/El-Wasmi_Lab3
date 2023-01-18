@@ -49,6 +49,14 @@
          type = "String";
       }
    }
+   element Switchs
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+   }
    element clk_0
    {
       datum _sortIndex
@@ -153,6 +161,11 @@
    internal="I2c.export_0"
    type="conduit"
    dir="end" />
+ <interface
+   name="pio_0_external_connection"
+   internal="Switchs.external_connection"
+   type="conduit"
+   dir="end" />
  <interface name="reset" internal="clk_0.clk_in_reset" type="reset" dir="end" />
  <module name="I2c" kind="opencores_i2c" version="9.1" enabled="1" />
  <module name="Seg" kind="altera_avalon_pio" version="18.1" enabled="1">
@@ -167,7 +180,21 @@
   <parameter name="resetValue" value="0" />
   <parameter name="simDoTestBenchWiring" value="false" />
   <parameter name="simDrivenValue" value="0" />
-  <parameter name="width" value="12" />
+  <parameter name="width" value="24" />
+ </module>
+ <module name="Switchs" kind="altera_avalon_pio" version="18.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="true" />
+  <parameter name="captureEdge" value="true" />
+  <parameter name="clockRate" value="50000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="ANY" />
+  <parameter name="generateIRQ" value="true" />
+  <parameter name="irqType" value="EDGE" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="2" />
  </module>
  <module name="clk_0" kind="clock_source" version="18.1" enabled="1">
   <parameter name="clockFrequency" value="50000000" />
@@ -214,7 +241,7 @@
   <parameter name="dataAddrWidth" value="18" />
   <parameter name="dataMasterHighPerformanceAddrWidth" value="1" />
   <parameter name="dataMasterHighPerformanceMapParam" value="" />
-  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='onchip_memory2_0.s1' start='0x10000' end='0x1A000' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_Lab2.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='I2c.avalon_slave_0' start='0x21000' end='0x21020' type='opencores_i2c.avalon_slave_0' /><slave name='timer_0.s1' start='0x21020' end='0x21040' type='altera_avalon_timer.s1' /><slave name='Seg.s1' start='0x21040' end='0x21050' type='altera_avalon_pio.s1' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x21050' end='0x21058' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
+  <parameter name="dataSlaveMapParam"><![CDATA[<address-map><slave name='Switchs.s1' start='0x0' end='0x20' type='altera_avalon_pio.s1' /><slave name='onchip_memory2_0.s1' start='0x10000' end='0x1A000' type='altera_avalon_onchip_memory2.s1' /><slave name='nios2_Lab2.debug_mem_slave' start='0x20800' end='0x21000' type='altera_nios2_gen2.debug_mem_slave' /><slave name='I2c.avalon_slave_0' start='0x21000' end='0x21020' type='opencores_i2c.avalon_slave_0' /><slave name='timer_0.s1' start='0x21020' end='0x21040' type='altera_avalon_timer.s1' /><slave name='Seg.s1' start='0x21040' end='0x21050' type='altera_avalon_pio.s1' /><slave name='jtag_uart_0.avalon_jtag_slave' start='0x21050' end='0x21058' type='altera_avalon_jtag_uart.avalon_jtag_slave' /></address-map>]]></parameter>
   <parameter name="data_master_high_performance_paddr_base" value="0" />
   <parameter name="data_master_high_performance_paddr_size" value="0" />
   <parameter name="data_master_paddr_base" value="0" />
@@ -260,7 +287,7 @@
   <parameter name="instruction_master_high_performance_paddr_size" value="0" />
   <parameter name="instruction_master_paddr_base" value="0" />
   <parameter name="instruction_master_paddr_size" value="0" />
-  <parameter name="internalIrqMaskSystemInfo" value="3" />
+  <parameter name="internalIrqMaskSystemInfo" value="7" />
   <parameter name="io_regionbase" value="0" />
   <parameter name="io_regionsize" value="0" />
   <parameter name="master_addr_map" value="false" />
@@ -473,6 +500,15 @@
  <connection
    kind="avalon"
    version="18.1"
+   start="nios2_Lab2.data_master"
+   end="Switchs.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
    start="nios2_Lab2.instruction_master"
    end="nios2_Lab2.debug_mem_slave">
   <parameter name="arbitrationPriority" value="1" />
@@ -489,9 +525,10 @@
   <parameter name="defaultConnection" value="false" />
  </connection>
  <connection kind="clock" version="18.1" start="clk_0.clk" end="nios2_Lab2.clk" />
- <connection kind="clock" version="18.1" start="clk_0.clk" end="jtag_uart_0.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="Seg.clk" />
  <connection kind="clock" version="18.1" start="clk_0.clk" end="timer_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="jtag_uart_0.clk" />
+ <connection kind="clock" version="18.1" start="clk_0.clk" end="Switchs.clk" />
  <connection
    kind="clock"
    version="18.1"
@@ -511,6 +548,13 @@
    start="nios2_Lab2.irq"
    end="timer_0.irq">
   <parameter name="irqNumber" value="1" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="nios2_Lab2.irq"
+   end="Switchs.irq">
+  <parameter name="irqNumber" value="2" />
  </connection>
  <connection
    kind="reset"
@@ -533,6 +577,11 @@
    version="18.1"
    start="clk_0.clk_reset"
    end="timer_0.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_0.clk_reset"
+   end="Switchs.reset" />
  <connection
    kind="reset"
    version="18.1"
