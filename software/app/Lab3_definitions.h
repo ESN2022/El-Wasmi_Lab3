@@ -14,7 +14,7 @@
 #include "sys/alt_sys_init.h"
 #include "opencores_i2c.h"
 
-
+// les adresses de registres de ADXL345
 #define ADXL345_DATAX0 0x32
 #define ADXL345_DATAX1 0x33
 #define ADXL345_DATAY0 0x34
@@ -28,9 +28,13 @@
 #define ACT_INACT_CTL  0x27
 #define POWER_CT       0x2D
 
-
+// les variables pour stocker les valeurs de X, Y et Z, et switch
 alt_16 X,Y,Z, data[6], switch_value;
+
+// les fonctions pour lire et ecrire dans les registres
 void write_register(alt_16 x,int value);
 int read_register(alt_16 x);
 alt_32 int_to_bcd(alt_32 int_value);
+
+// fonction pour lire et afficher les valeurs des axes
 void axes();
